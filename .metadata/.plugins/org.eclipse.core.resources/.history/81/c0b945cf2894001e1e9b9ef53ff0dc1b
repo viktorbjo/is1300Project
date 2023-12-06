@@ -1,0 +1,65 @@
+/*
+ * test.c
+ *
+ *  Created on: Nov 29, 2023
+ *      Author: vikto
+ */
+#include <stdint.h>
+#include "stdbool.h"
+#include "test.h"
+#include "gpio.h"
+#include "spi.h"
+
+uint8_t dataout[4] = {0x00, 0xf0, 0x0f, 0xff};
+//uint8_t leds1[] = { 0x07 };
+
+void Test_program(void)
+{
+	Test_ShiftLeds();
+}
+
+/*
+void shiftOut(uint8_t * data, uint16_t size){
+
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
+
+	HAL_SPI_Transmit(&hspi2, data, size, 100);
+
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
+}
+*/
+
+void ShiftLED(uint8_t ledbuffer[], uint8_t bytesize)
+{
+	//HAL_GPIO_WritePin(Reset_595_GPIO_Port, Reset_595_Pin, GPIO_PIN_SET);   // Set MR high (active low)
+	//HAL_GPIO_WritePin(Enable_595_GPIO_Port, Enable_595_Pin, GPIO_PIN_RESET); // Reset OE low (active low)
+
+	//HAL_Delay(1);
+
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi3, &ledbuffer[0], bytesize, 100);
+
+	HAL_Delay(1);
+
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
+	HAL_Delay(1);
+
+}
+
+void Test_ShiftLeds(void)
+{
+	uint8_t bytes = 3;
+	uint8_t leds1[] = { 0x000007 }; 		//traffic light 1 (led 7 - 9)
+	uint8_t leds2[] = { 0x000007 << 3 }; 	//traffic light 2 (led 10 - 12)
+
+
+	ShiftLED(leds1, bytes);
+	HAL_Delay(1000);
+
+	ShiftLED(leds2, bytes);
+	HAL_Delay(1000);
+
+
+	HAL_Delay(1000);
+
+}
