@@ -47,7 +47,7 @@ void traffic(void)
 					    if (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
 					    	    {
 					    		//ShiftLED(ledsOff,3);
-					    	toggleLEDWithFrequency2(toggleFreq, pedestrianDelay);
+					    	toggleLEDWithFrequency2(toggleFreq, pedestrianDelay-orangeDelay);
 					    	      NextState = Something;
 					    	        }
 
@@ -62,7 +62,7 @@ void traffic(void)
 
 
 
-							toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay));
+							toggleLEDWithFrequency(toggleFreq, (orangeDelay));
 
 							NextState = Something2;
 

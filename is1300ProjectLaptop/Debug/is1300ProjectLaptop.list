@@ -1478,7 +1478,7 @@ void traffic(void)
  8000aa2:	a201      	add	r2, pc, #4	; (adr r2, 8000aa8 <traffic+0x28>)
  8000aa4:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  8000aa8:	08000ab9 	.word	0x08000ab9
- 8000aac:	08000afd 	.word	0x08000afd
+ 8000aac:	08000b03 	.word	0x08000b03
  8000ab0:	08000b1b 	.word	0x08000b1b
  8000ab4:	08000b4b 	.word	0x08000b4b
 				{
@@ -1509,40 +1509,40 @@ void traffic(void)
  8000ae2:	d148      	bne.n	8000b76 <traffic+0xf6>
 					    	    {
 					    		//ShiftLED(ledsOff,3);
-					    	toggleLEDWithFrequency2(toggleFreq, pedestrianDelay);
+					    	toggleLEDWithFrequency2(toggleFreq, pedestrianDelay-orangeDelay);
  8000ae4:	4b29      	ldr	r3, [pc, #164]	; (8000b8c <traffic+0x10c>)
- 8000ae6:	881b      	ldrh	r3, [r3, #0]
- 8000ae8:	4a29      	ldr	r2, [pc, #164]	; (8000b90 <traffic+0x110>)
- 8000aea:	8812      	ldrh	r2, [r2, #0]
- 8000aec:	4611      	mov	r1, r2
- 8000aee:	4618      	mov	r0, r3
- 8000af0:	f000 f8a6 	bl	8000c40 <toggleLEDWithFrequency2>
+ 8000ae6:	8818      	ldrh	r0, [r3, #0]
+ 8000ae8:	4b29      	ldr	r3, [pc, #164]	; (8000b90 <traffic+0x110>)
+ 8000aea:	881a      	ldrh	r2, [r3, #0]
+ 8000aec:	4b29      	ldr	r3, [pc, #164]	; (8000b94 <traffic+0x114>)
+ 8000aee:	881b      	ldrh	r3, [r3, #0]
+ 8000af0:	1ad3      	subs	r3, r2, r3
+ 8000af2:	b29b      	uxth	r3, r3
+ 8000af4:	4619      	mov	r1, r3
+ 8000af6:	f000 f8a3 	bl	8000c40 <toggleLEDWithFrequency2>
 					    	      NextState = Something;
- 8000af4:	4b22      	ldr	r3, [pc, #136]	; (8000b80 <traffic+0x100>)
- 8000af6:	2201      	movs	r2, #1
- 8000af8:	701a      	strb	r2, [r3, #0]
+ 8000afa:	4b21      	ldr	r3, [pc, #132]	; (8000b80 <traffic+0x100>)
+ 8000afc:	2201      	movs	r2, #1
+ 8000afe:	701a      	strb	r2, [r3, #0]
 
 
 
 
 						 // Stay in Start state
 					break;
- 8000afa:	e03c      	b.n	8000b76 <traffic+0xf6>
+ 8000b00:	e039      	b.n	8000b76 <traffic+0xf6>
 					case Something:
 					{
 
 
 
-							toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay));
- 8000afc:	4b23      	ldr	r3, [pc, #140]	; (8000b8c <traffic+0x10c>)
- 8000afe:	8818      	ldrh	r0, [r3, #0]
- 8000b00:	4b23      	ldr	r3, [pc, #140]	; (8000b90 <traffic+0x110>)
- 8000b02:	881a      	ldrh	r2, [r3, #0]
- 8000b04:	4b23      	ldr	r3, [pc, #140]	; (8000b94 <traffic+0x114>)
- 8000b06:	881b      	ldrh	r3, [r3, #0]
- 8000b08:	1ad3      	subs	r3, r2, r3
- 8000b0a:	b29b      	uxth	r3, r3
- 8000b0c:	4619      	mov	r1, r3
+							toggleLEDWithFrequency(toggleFreq, (orangeDelay));
+ 8000b02:	4b22      	ldr	r3, [pc, #136]	; (8000b8c <traffic+0x10c>)
+ 8000b04:	881b      	ldrh	r3, [r3, #0]
+ 8000b06:	4a23      	ldr	r2, [pc, #140]	; (8000b94 <traffic+0x114>)
+ 8000b08:	8812      	ldrh	r2, [r2, #0]
+ 8000b0a:	4611      	mov	r1, r2
+ 8000b0c:	4618      	mov	r0, r3
  8000b0e:	f000 f849 	bl	8000ba4 <toggleLEDWithFrequency>
 
 							NextState = Something2;
