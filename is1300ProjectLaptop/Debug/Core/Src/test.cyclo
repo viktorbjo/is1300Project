@@ -1,5 +1,6 @@
 ../Core/Src/test.c:17:6:Test_program	1
-../Core/Src/test.c:34:6:ShiftLED	1
-../Core/Src/test.c:51:6:Test_ShiftLeds	3
-../Core/Src/test.c:72:6:testButtons	3
-../Core/Src/test.c:89:6:testPL	6
+../Core/Src/test.c:36:6:ShiftLED	1
+../Core/Src/test.c:53:6:Test_ShiftLeds	3
+../Core/Src/test.c:74:6:testButtons	3
+../Core/Src/test.c:91:6:testPL	6
+../Core/Src/test.c:120:6:shifter	2

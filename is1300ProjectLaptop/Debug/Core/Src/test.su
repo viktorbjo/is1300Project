@@ -1,5 +1,6 @@
-../Core/Src/test.c:17:6:Test_program	8	static
-../Core/Src/test.c:34:6:ShiftLED	16	static
-../Core/Src/test.c:51:6:Test_ShiftLeds	24	static
-../Core/Src/test.c:72:6:testButtons	24	static
-../Core/Src/test.c:89:6:testPL	24	static
+../Core/Src/test.c:17:6:Test_program	4	static
+../Core/Src/test.c:36:6:ShiftLED	16	static
+../Core/Src/test.c:53:6:Test_ShiftLeds	24	static
+../Core/Src/test.c:74:6:testButtons	24	static
+../Core/Src/test.c:91:6:testPL	24	static
+../Core/Src/test.c:120:6:shifter	16	static

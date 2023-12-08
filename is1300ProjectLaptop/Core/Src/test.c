@@ -16,8 +16,10 @@ uint8_t dataout[4] = {0x00, 0xf0, 0x0f, 0xff};
 
 void Test_program(void)
 {
-	testButtons();
+	//testButtons();
 	//testPL();
+	//shifter();
+	//blink();
 }
 
 /*
@@ -114,3 +116,22 @@ while (1)
     }
   }
 }
+
+void shifter(void){
+    uint8_t ledBuffer[3] = {0,0,0};  // Initialize to turn off all LEDs
+    //uint8_t currentLED = 0;
+    uint8_t leds4[3] = { 0x38, 0x3F, 0 };
+    //uint8_t led5[2] = {0x07};
+
+    while(1)
+        {
+
+            if(HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
+                ShiftLED(leds4, 3);
+
+            HAL_Delay(1);
+            ShiftLED(ledBuffer, 3);
+        }
+
+    }
+
