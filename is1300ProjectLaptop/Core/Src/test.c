@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include "stdbool.h"
 #include "test.h"
+#include "traffic.h"
 #include "gpio.h"
 #include "spi.h"
 
@@ -115,6 +116,25 @@ while (1)
       ShiftLED(ledBuffer, 3);
     }
   }
+}
+
+void blink(void){
+
+	while(1)
+	        {
+
+	    if (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
+	    {
+	      // Debounce the button
+	      HAL_Delay(50);
+	      while (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
+	        ;
+
+	       //toggleLEDWithFrequency(200,5000);
+	        }
+
+
+	        }
 }
 
 void shifter(void){

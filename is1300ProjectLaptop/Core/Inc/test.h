@@ -16,6 +16,7 @@ void Test_program(void);
 
 void ShiftLED(uint8_t ledbuffer[], uint8_t bytesize);
 void Test_ShiftLeds(void);
+void blink(void);
 void testButtons(void);
 void testPL(void);
 void shifter(void);
