@@ -3419,3 +3419,92 @@ Finished building: default.size.stdout
  
 Finished building: is1300ProjectLaptop.list
  
+11:43:36 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/traffic.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/traffic.d" -MT"Core/Src/traffic.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/traffic.o"
+arm-none-eabi-gcc -o "is1300ProjectLaptop.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/viktorb/STM32CubeIDE/project/is1300ProjectLaptop/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="is1300ProjectLaptop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: is1300ProjectLaptop.elf
+ 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+arm-none-eabi-objdump -h -S is1300ProjectLaptop.elf  > "is1300ProjectLaptop.list"
+   text	   data	    bss	    dec	    hex	filename
+  15588	     28	   1908	  17524	   4474	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 
+Finished building: is1300ProjectLaptop.list
+ 
+11:46:52 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/traffic.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/traffic.d" -MT"Core/Src/traffic.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/traffic.o"
+arm-none-eabi-gcc -o "is1300ProjectLaptop.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/viktorb/STM32CubeIDE/project/is1300ProjectLaptop/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="is1300ProjectLaptop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: is1300ProjectLaptop.elf
+ 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+arm-none-eabi-objdump -h -S is1300ProjectLaptop.elf  > "is1300ProjectLaptop.list"
+   text	   data	    bss	    dec	    hex	filename
+  15580	     28	   1908	  17516	   446c	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 
+Finished building: is1300ProjectLaptop.list
+ 
+11:53:48 **** Incremental Build of configuration Debug for project is1300Project ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/test.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/test.d" -MT"Core/Src/test.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/test.o"
+../Core/Src/test.c: In function 'testPL':
+../Core/Src/test.c:79:34: error: 'PL2' undeclared (first use in this function)
+   79 |             if (HAL_GPIO_ReadPin(PL2, BUTTON_PIN) == GPIO_PIN_RESET)
+      |                                  ^~~
+../Core/Src/test.c:79:34: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/test.c:79:39: error: 'BUTTON_PIN' undeclared (first use in this function)
+   79 |             if (HAL_GPIO_ReadPin(PL2, BUTTON_PIN) == GPIO_PIN_RESET)
+      |                                       ^~~~~~~~~~
+../Core/Src/test.c:83:39: error: 'BUTTON_PORT' undeclared (first use in this function)
+   83 |               while (HAL_GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN) == GPIO_PIN_RESET)
+      |                                       ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:46: Core/Src/test.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+11:53:50 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/test.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/test.d" -MT"Core/Src/test.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/test.o"
+arm-none-eabi-gcc "../Core/Src/traffic.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/traffic.d" -MT"Core/Src/traffic.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/traffic.o"
+arm-none-eabi-gcc "../Core/Src/trafficFunctions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/trafficFunctions.d" -MT"Core/Src/trafficFunctions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/trafficFunctions.o"
+arm-none-eabi-gcc -o "is1300ProjectLaptop.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/viktorb/STM32CubeIDE/project/is1300ProjectLaptop/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="is1300ProjectLaptop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: is1300ProjectLaptop.elf
+ 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+arm-none-eabi-objdump -h -S is1300ProjectLaptop.elf  > "is1300ProjectLaptop.list"
+   text	   data	    bss	    dec	    hex	filename
+  15580	     28	   1908	  17516	   446c	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 
+Finished building: is1300ProjectLaptop.list
+ 
+12:02:18 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/test.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/test.d" -MT"Core/Src/test.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/test.o"
+arm-none-eabi-gcc -o "is1300ProjectLaptop.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/viktorb/STM32CubeIDE/project/is1300ProjectLaptop/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="is1300ProjectLaptop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: is1300ProjectLaptop.elf
+ 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+arm-none-eabi-objdump -h -S is1300ProjectLaptop.elf  > "is1300ProjectLaptop.list"
+   text	   data	    bss	    dec	    hex	filename
+  15568	     28	   1908	  17504	   4460	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 
+Finished building: is1300ProjectLaptop.list
+ 
+12:24:46 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15568	     28	   1908	  17504	   4460	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 
+12:36:19 **** Incremental Build of configuration Debug for project is1300ProjectLaptop ****
+make -j4 all 
+arm-none-eabi-size  is1300ProjectLaptop.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15568	     28	   1908	  17504	   4460	is1300ProjectLaptop.elf
+Finished building: default.size.stdout
+ 

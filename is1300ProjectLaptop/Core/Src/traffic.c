@@ -41,8 +41,8 @@ void traffic(void)
 					case Start:
 					    uint8_t startLeds[3] = {0x20, 0x0C, 0};
 
-					    uint8_t blinkingLED[3] = {0x20, 0x24, 0};
-					    uint8_t leds[3] = {0x20, 0x04, 0};
+					    uint8_t blinkingLED[3] = {0x20, 0x2C, 0};
+					    uint8_t leds[3] = {0x20, 0x0C, 0};
 
 					    ShiftLED(startLeds, 3);
 
@@ -58,8 +58,8 @@ void traffic(void)
 					case BlinkingWhileOrange:
 					{
 
-							uint8_t blinkingLED[3] = {0x10, 0x22, 0};
-							uint8_t leds[3] = {0x10, 0x02, 0};
+							uint8_t blinkingLED[3] = {0x10, 0x2A, 0};
+							uint8_t leds[3] = {0x10, 0x0A, 0};
 
 							toggleLEDWithFrequency(toggleFreq, orangeDelay, blinkingLED, leds);
 

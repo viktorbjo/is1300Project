@@ -34,7 +34,7 @@ void shiftOut(uint8_t * data, uint16_t size){
 }
 */
 
-void ShiftLED(uint8_t ledbuffer[], uint8_t bytesize)
+void ShiftLED(uint8_t buffer[], uint8_t regs)
 {
 	//HAL_GPIO_WritePin(Reset_595_GPIO_Port, Reset_595_Pin, GPIO_PIN_SET);   // Set MR high (active low)
 	//HAL_GPIO_WritePin(Enable_595_GPIO_Port, Enable_595_Pin, GPIO_PIN_RESET); // Reset OE low (active low)
@@ -42,12 +42,12 @@ void ShiftLED(uint8_t ledbuffer[], uint8_t bytesize)
 	//HAL_Delay(1);
 
 	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi3, &ledbuffer[0], bytesize, 100);
+	HAL_SPI_Transmit(&hspi3, &buffer[0], regs, 100);
 
-	HAL_Delay(1);
+	//HAL_Delay(1);
 
 	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
-	HAL_Delay(1);
+	//HAL_Delay(1);
 
 }
 
