@@ -34,6 +34,8 @@ void shiftOut(uint8_t * data, uint16_t size){
 }
 */
 
+//skriv om denna med endast en inparameter, buffern, och sen ädra regs till sizeof(buffer), sätt transmiten till hal_max_blabla
+//ta också in den gamla toggle lights så den funkkar med blink
 void ShiftLED(uint8_t buffer[], uint8_t regs)
 {
 	//HAL_GPIO_WritePin(Reset_595_GPIO_Port, Reset_595_Pin, GPIO_PIN_SET);   // Set MR high (active low)
