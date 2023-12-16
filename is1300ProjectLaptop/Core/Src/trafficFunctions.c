@@ -14,7 +14,7 @@
 #include "traffic.h"
 
 
-void toggleLEDWithFrequency(uint16_t toggleFrequency, uint16_t duration_ms,  uint8_t blinkingLED[3], uint8_t leds[3] ) {
+void toggleLEDWithFrequency(uint16_t toggleFrequency, uint16_t duration_ms,  uint8_t blinkingLED[3], uint8_t staticleds[3] ) {
 	   //uint8_t blinkingLED[3] = {0x10, 0x22, 0};
 	    //uint8_t leds[3] = {0x10, 0x02, 0};
 	    uint8_t ledState = 0; // 0 for OFF, 1 for ON
@@ -38,7 +38,7 @@ void toggleLEDWithFrequency(uint16_t toggleFrequency, uint16_t duration_ms,  uin
 	            ShiftLED(blinkingLED, 3);  // Turn on the LED
 	        } else {
 
-	            ShiftLED(leds, 3);
+	            ShiftLED(staticleds, 3);
 	        }
 
 	        // Introduce a delay based on the toggle frequency
@@ -52,3 +52,5 @@ void addLights(uint8_t result[3], const uint8_t array1[3], const uint8_t array2[
         result[i] = array1[i] + array2[i];
     }
 }
+
+

@@ -51,6 +51,7 @@ void ShiftLED(uint8_t buffer[], uint8_t regs)
 
 }
 
+//this is a function that cylces through all leds and tests all lights.
 void Test_ShiftLeds(void)
 {
 	uint8_t ledBuffer[NUM_LEDS];
@@ -72,6 +73,7 @@ void Test_ShiftLeds(void)
 	    }
 	}
 
+//tests the switches, turn on light if switch is on.
 void testButtons(void){
 	uint8_t setLED[] = { 0x07 };
 	uint8_t testLED[] = { 0x0F };
@@ -118,6 +120,7 @@ while (1)
   }
 }
 
+//test if blinking works when pressing button
 void blink(void){
 
 	while(1)
@@ -137,6 +140,8 @@ void blink(void){
 	        }
 }
 
+
+//tests the pedestrian buttons.
 void shifter(void){
     uint8_t ledBuffer[3] = {0,0,0};  // Initialize to turn off all LEDs
     //uint8_t currentLED = 0;

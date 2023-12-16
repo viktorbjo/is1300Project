@@ -22,7 +22,6 @@ typedef enum
 
 static states State, NextState;
 
-uint8_t ledsOff[3] = {0, 0, 0};
 uint16_t toggleFreq = 200;
 uint16_t pedestrianDelay = 5000;
 uint16_t walkingDelay = 5000;
@@ -40,16 +39,14 @@ void traffic(void)
 				{
 					case Start:
 					    uint8_t startLeds[3] = {0x20, 0x0C, 0};
-
 					    uint8_t blinkingLED[3] = {0x20, 0x2C, 0};
-					    uint8_t leds[3] = {0x20, 0x0C, 0};
 
 					    ShiftLED(startLeds, 3);
 
 					    if (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
 					    	    {
 					    		//ShiftLED(ledsOff,3);
-					    	toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay),blinkingLED, leds);
+					    	toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay),blinkingLED, startLeds);
 					    	      NextState = BlinkingWhileOrange;
 					    	        }
 
