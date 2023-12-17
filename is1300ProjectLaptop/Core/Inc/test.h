@@ -14,9 +14,9 @@
 
 void Test_program(void);
 
-void ShiftLED(uint8_t buffer[], uint8_t regs);
-void Test_ShiftLeds(void);
+void shiftOut(uint8_t buffer[], uint8_t regs);
+void toggleBlink(void);
 void blink(void);
-void testButtons(void);
+void testSwitches(void);
 void testPL(void);
-void shifter(void);
+void ButtonTest(void);

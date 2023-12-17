@@ -1,8 +1,13 @@
-/* test.c
- *
- *  Created on: Nov 29, 2023
- *      Author: vikto
- */
+/**
+******************************************************************************
+@brief  Testing functions for traffic light project
+@file test.c
+@author Viktor Björkén
+@version 1.0
+@date December-2023
+@brief Testing functions for traffic light project
+******************************************************************************
+*/
 #include <stdint.h>
 #include "stdbool.h"
 #include "test.h"
@@ -10,89 +15,86 @@
 #include "gpio.h"
 #include "spi.h"
 
-uint8_t dataout[4] = {0x00, 0xf0, 0x0f, 0xff};
-
-#define NUM_LEDS 8
-//uint8_t leds1[] = { 0x07 };
-
 void Test_program(void)
 {
-	//testButtons();
+	//testSwitches();
+	//ButtonTest();
 	//testPL();
-	//shifter();
-	//blink();
+	blink();
+	//toggleBlink();
+
 }
 
-/*
-void shiftOut(uint8_t * data, uint16_t size){
-
-	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
-
-	HAL_SPI_Transmit(&hspi2, data, size, 100);
-
-	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
-}
+/**
+@brief shiftOut, shifts value into SR to turn LED
+@param uint8_t buffer[] the buffer of bits that represent a LED
+@param uint8_t regs, the size of the amount of data
+@return void
 */
-
-//skriv om denna med endast en inparameter, buffern, och sen ädra regs till sizeof(buffer), sätt transmiten till hal_max_blabla
-//ta också in den gamla toggle lights så den funkkar med blink
-void ShiftLED(uint8_t buffer[], uint8_t regs)
+void shiftOut(uint8_t buffer[], uint8_t regs)
 {
 	//HAL_GPIO_WritePin(Reset_595_GPIO_Port, Reset_595_Pin, GPIO_PIN_SET);   // Set MR high (active low)
 	//HAL_GPIO_WritePin(Enable_595_GPIO_Port, Enable_595_Pin, GPIO_PIN_RESET); // Reset OE low (active low)
-
 	//HAL_Delay(1);
-
-	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi3, &buffer[0], regs, 100);
-
-	//HAL_Delay(1);
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
 
 	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
-	//HAL_Delay(1);
+	HAL_Delay(1);
 
 }
 
-//this is a function that cylces through all leds and tests all lights.
-void Test_ShiftLeds(void)
-{
-	uint8_t ledBuffer[NUM_LEDS];
 
-	    // Turn on each LED one by one and test
-	    for (uint8_t i = 0; i < NUM_LEDS; ++i) {
-	        // Reset the buffer
-	        for (uint8_t j = 0; j < NUM_LEDS; ++j) {
-	            ledBuffer[j] = 0x00;  // Assuming 0x00 means LED off
-	        }
 
-	        // Set the current LED to ON
-	        ledBuffer[i] = 0xFF;  // Assuming 0xFF means LED on
-
-	        // Shift the LED buffer to the shift register
-	        ShiftLED(ledBuffer, NUM_LEDS);
-
-	        // Add a delay here if necessary to observe the LED state
-	    }
-	}
-
-//tests the switches, turn on light if switch is on.
-void testButtons(void){
-	uint8_t setLED[] = { 0x07 };
-	uint8_t testLED[] = { 0x0F };
-	uint8_t resetLED[] = { 0x00 };
+/**
+@brief testSwitches, tests the switches, turn on light if switch is on.
+@param void
+@return void
+*/
+void testSwitches(void){
+	uint8_t setLED[3] = { 0,0x07,0 };
+	uint8_t testLED[3] = { 0,0x38,0 };
+	uint8_t resetLED[3] = {0, 0x00,0 };
  while(1){
 	if(HAL_GPIO_ReadPin(TL2_Car_GPIO_Port ,TL2_Car_Pin) == GPIO_PIN_SET)
-		ShiftLED(setLED, 3);
+		shiftOut(setLED, 3);
 
 	if(HAL_GPIO_ReadPin(TL4_Car_GPIO_Port ,TL4_Car_Pin) == GPIO_PIN_SET)
-			ShiftLED(testLED, 3);
+			shiftOut(testLED, 3);
 
 	HAL_Delay(1);
-	ShiftLED(resetLED, 3);
+	shiftOut(resetLED, 3);
  }
 }
 
-//funkar ej
+/**
+@brief ButtonTest, Initial tests the pedestrian buttons.
+@param void
+@return void
+*/
+void ButtonTest(void){
+    uint8_t ledBuffer[3] = {0,0,0};  // Initialize to turn off all LEDs
+    //uint8_t currentLED = 0;
+    uint8_t leds4[3] = { 0x38, 0x3F, 0 };
+    //uint8_t led5[2] = {0x07};
+
+    while(1)
+        {
+
+            if(HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
+                shiftOut(leds4, 3);
+
+            HAL_Delay(1);
+            shiftOut(ledBuffer, 3);
+        }
+
+    }
+
+/**
+@brief testPL, improved test for buttons but also for all leds
+@param void
+@return void
+*/
 void testPL(void){
 	uint8_t ledBuffer[3] = {0, 0, 0};  // Initialize to turn off all LEDs
 	uint8_t currentLED = 0;
@@ -117,12 +119,16 @@ while (1)
       }
 
       // Shift the updated LED buffer to the shift registers
-      ShiftLED(ledBuffer, 3);
+      shiftOut(ledBuffer, 3);
     }
   }
 }
 
-//test if blinking works when pressing button
+/**
+@brief blink,test if blinking works when pressing button
+@param void
+@return void
+*/
 void blink(void){
 
 	while(1)
@@ -135,30 +141,32 @@ void blink(void){
 	      while (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
 	        ;
 
-	       //toggleLEDWithFrequency(200,5000);
+	      	  toggleBlink();
 	        }
-
-
-	        }
+	    }
 }
 
+/**
+@brief toggleBlink, turns led on and off while keeping some light on all the time
+@param void
+@return void
+*/
+void toggleBlink(void) {
+	    uint8_t ledState = 0; // 0 for OFF, 1 for ON
+	    uint8_t staticleds[3] = {0x08, 0x01, 0};
+	    uint8_t blinkingLED[3] = {0x08, 0x21, 0};
 
-//tests the pedestrian buttons.
-void shifter(void){
-    uint8_t ledBuffer[3] = {0,0,0};  // Initialize to turn off all LEDs
-    //uint8_t currentLED = 0;
-    uint8_t leds4[3] = { 0x38, 0x3F, 0 };
-    //uint8_t led5[2] = {0x07};
+	    while (1) {
 
-    while(1)
-        {
+	        ledState = !ledState;
 
-            if(HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
-                ShiftLED(leds4, 3);
+	        if (ledState) {
+	            ShiftREG(blinkingLED, 3);  // Turn on the LED
+	        } else {
 
-            HAL_Delay(1);
-            ShiftLED(ledBuffer, 3);
-        }
+	            ShiftREG(staticleds, 3);
+	        }
 
-    }
-
+	        HAL_Delay(500);
+	    }
+	}

@@ -1,9 +1,13 @@
-/*
- * traffic.c
- *
- *  Created on: Dec 7, 2023
- *      Author: viktorb
- */
+/**
+******************************************************************************
+@brief main file for traffic program with state machine
+@file traffic.c
+@author Viktor Björkén
+@version 1.0
+@date December-2023
+@brief State machine for traffic-program
+******************************************************************************
+*/
 #include <stdint.h>
 #include "stdbool.h"
 #include "gpio.h"
@@ -27,6 +31,9 @@ uint16_t pedestrianDelay = 5000;
 uint16_t walkingDelay = 5000;
 uint16_t orangeDelay = 2000;
 
+/**
+ @brief Implements the main traffic light control logic.
+ */
 void traffic(void)
 {
 	State = Start;
@@ -41,11 +48,10 @@ void traffic(void)
 					    uint8_t startLeds[3] = {0x20, 0x0C, 0};
 					    uint8_t blinkingLED[3] = {0x20, 0x2C, 0};
 
-					    ShiftLED(startLeds, 3);
+					    ShiftREG(startLeds, 3);
 
 					    if (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
 					    	    {
-					    		//ShiftLED(ledsOff,3);
 					    	toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay),blinkingLED, startLeds);
 					    	      NextState = BlinkingWhileOrange;
 					    	        }
@@ -68,7 +74,7 @@ void traffic(void)
 					{
 						uint8_t herrgoman[3] = {0x08, 0x11, 0};
 
-							ShiftLED(herrgoman,3);
+							ShiftREG(herrgoman,3);
 							HAL_Delay(walkingDelay);
 							NextState = OrangeForCars;
 
@@ -78,7 +84,7 @@ void traffic(void)
 					{
 						uint8_t orange[3] = {0x10, 0x0A, 0};
 
-							ShiftLED(orange,3);
+							ShiftREG(orange,3);
 							HAL_Delay(orangeDelay);
 							NextState = Start;
 
