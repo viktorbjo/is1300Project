@@ -24,10 +24,10 @@
 */
 void ShiftREG(uint8_t buffer[], uint8_t regs)
 {
-	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi3, &buffer[0], regs, HAL_MAX_DELAY);
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_RESET); // sets latch pin to low
+	HAL_SPI_Transmit(&hspi3, &buffer[0], regs, HAL_MAX_DELAY); 			 // transmit buffer with bits for light
 
-	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(STCP_595_GPIO_Port, STCP_595_Pin, GPIO_PIN_SET);	//latch pin goes high
 	HAL_Delay(1);
 
 }

@@ -26,6 +26,8 @@ typedef enum
 
 static states State, NextState;
 
+
+//all Varibles that are stated in the assignment
 uint16_t toggleFreq = 200;
 uint16_t pedestrianDelay = 5000;
 uint16_t walkingDelay = 5000;
@@ -45,23 +47,24 @@ void traffic(void)
 				switch (State) // State machine
 				{
 					case Start:
-					    uint8_t startLeds[3] = {0x20, 0x0C, 0};
-					    uint8_t blinkingLED[3] = {0x20, 0x2C, 0};
+					    uint8_t startLeds[3] = {0x20, 0x0C, 0}; //Bits for PL=red and TL=green
+					    uint8_t blinkingLED[3] = {0x20, 0x2C, 0}; //Keeping the same bits on but also blue indicator
 
 					    ShiftREG(startLeds, 3);
 
 					    if (HAL_GPIO_ReadPin(GPIOB ,PL2_Switch_Pin) == GPIO_PIN_RESET)
 					    	    {
+					    	// when pressing button first blinking with same leds before changing state
 					    	toggleLEDWithFrequency(toggleFreq, (pedestrianDelay-orangeDelay),blinkingLED, startLeds);
 					    	      NextState = BlinkingWhileOrange;
 					    	        }
 
 					break;
 
-					case BlinkingWhileOrange:
+					case BlinkingWhileOrange: //next state
 					{
 
-							uint8_t blinkingLED[3] = {0x10, 0x2A, 0};
+							uint8_t blinkingLED[3] = {0x10, 0x2A, 0}; //same logic as above, bur rather TL=Orange
 							uint8_t leds[3] = {0x10, 0x0A, 0};
 
 							toggleLEDWithFrequency(toggleFreq, orangeDelay, blinkingLED, leds);
@@ -70,23 +73,23 @@ void traffic(void)
 
 					}
 					break;
-					case PedestrianWalk:
+					case PedestrianWalk: //next state
 					{
-						uint8_t herrgoman[3] = {0x08, 0x11, 0};
+						uint8_t herrgoman[3] = {0x08, 0x11, 0}; //green for PL, red for TL
 
 							ShiftREG(herrgoman,3);
-							HAL_Delay(walkingDelay);
+							HAL_Delay(walkingDelay); //keeping lights in this stage for walkingDelay ms
 							NextState = OrangeForCars;
 
 					}
 					break;
-					case OrangeForCars:
+					case OrangeForCars: // next state, same logic as above but different leds.
 					{
 						uint8_t orange[3] = {0x10, 0x0A, 0};
 
 							ShiftREG(orange,3);
 							HAL_Delay(orangeDelay);
-							NextState = Start;
+							NextState = Start; // go back to start
 
 					}
 					default:
